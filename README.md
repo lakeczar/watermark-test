@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+* OS Requirements
+    Latest Ubuntu or WSL
 
 * Ruby version
+    3.4.2
 
-* System dependencies
+* Install Dependencies
+    bundle install
 
-* Configuration
-
-* Database creation
-
-* Database initialization
+* Running Application
+    bin/rails server
 
 * How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    bin/rails test

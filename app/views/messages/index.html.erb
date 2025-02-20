@@ -1,0 +1,45 @@
+<%= stylesheet_link_tag('home') %>
+<h1>Video Messages Table</h1>
+<h1>Messages</h1>
+<%= link_to 'New Message', new_message_path %>
+
+<% if flash[:notice] %>
+    <div class="flash notice">
+      <%= flash[:notice] %>
+    </div>
+<% end %>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Thumbnail</th>
+        <th>Video</th>
+        <th>Actions</th>
+    </tr>
+    <% @messages.each do |message| %>
+        <tr>
+            <td>
+                <h3><%= message.title %></h3>
+            </td>
+            <td>
+                <p><%= message.description %></p>
+            </td>
+            <td>
+                <% if message.thumbnail.present? %>
+                    <img src="<%= message.thumbnail.url %>" alt="Thumbnail" width="320" height="240">
+                <% end %>
+            </td>
+            <td>
+                <video width="320" height="240" controls>
+                    <source src="<%= message.video.url %>" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </td>
+            <td class="actions">
+                <%= link_to 'Edit', edit_message_path(message), class: "btn button-actions" %>
+                <%= button_to 'Delete', message, method: :delete, class: "btn button-actions" %>
+            </td>
+        </tr>
+    <% end %>
+</table>

@@ -1,0 +1,41 @@
+<%= stylesheet_link_tag('messages_view') %>
+<h1>Upload New Video</h1>
+<%= form_with(model: @message, local: true) do |f| %>
+	<div class="form-fields">
+		<div class="field">
+			<%= f.label :title %>
+			<%= f.text_field :title %>
+			<% if @message.errors[:title].any? %>
+				<div class="error">
+					<%= @message.errors[:title][0] %>
+				</div>
+			<% end %>
+		</div>
+
+		<div class="field">
+			<%= f.label :description %>
+			<%= f.text_area :description %>
+		</div>
+
+		<div class="field">
+			<%= f.label :video %>
+			<%= f.file_field :video %>
+			<% if @message.errors[:video].any? %>
+				<div class="error">
+					<%= @message.errors[:video][0] %>
+				</div>
+			<% end %>
+		</div>
+
+		<div class="field">
+			<%= f.label :thumbnail %>
+			<%= f.file_field :thumbnail %>
+		</div>
+	</div>
+	<div class="actions">
+		<%= f.submit "Upload", class: "btn upload-button" %>
+		<%= link_to "Cancel", root_path, class: "btn cancel-button" %>
+	</div>
+<% end %>
+
+<%= link_to 'Back to Home', root_path %>

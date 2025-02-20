@@ -1,0 +1,28 @@
+.error{
+    color: red;
+}
+
+.field  {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-fields{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.actions{
+    display: flex;
+    gap: 10px;
+}
+
+.upload-button{
+    background-color: #939393;
+}
+
+.cancel-button{
+    background-color: #f44336;
+    text-decoration: none;
+}
