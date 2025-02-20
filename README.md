@@ -1,16 +1,16 @@
 # README
 
-* OS Requirements
+## OS Requirements
     Latest Ubuntu or WSL
 
-* Ruby version
+## Ruby version
     3.4.2
 
-* Install Dependencies
+## Install Dependencies
     bundle install
 
-* Running Application
+## Running Application
     bin/rails server
 
-* How to run the test suite
+## How to run the test suite
     bin/rails test
