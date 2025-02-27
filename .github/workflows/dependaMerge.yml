@@ -1,22 +1,23 @@
-name: DependaMerge
+name: Dependabot auto-merge
+on: pull_request
 
-on:
-  pull_request:
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   dependabot:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'lakeczar/watermark-test'
     steps:
-      - uses: actions/checkout@v2
-
-      - name: DependaMerge
-        uses: dailydevops/dependamerge-action@v1
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@d7267f607e9d3fb96fc2fbe83e0af444713e90b7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          command: squash # Not required, default is squash
-          approve-only: false # Not required, default is false
-          handle-submodule: false # Not required, default is false
-          handle-dependency-group: true # Not required, default is true
-          target: patch # Not required, default is patch
-          skip-commit-verification: false # Not required, default is false
-          skip-verification: false # Not required, default is false
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Enable auto-merge for Dependabot PRs
+        if: contains(steps.metadata.outputs.dependency-names, 'my-dependency') && steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
